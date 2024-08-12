@@ -24,9 +24,13 @@ export default async (event, context) => {
     
         return {
             statusCode: 200,
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Headers': 'Content-Type',
+              },          
             body: JSON.stringify({ message: data.choices[0].text.trim() })
         };
-        
+
         } catch (error) {
         console.error('Error fetching reply:', error);
         return `There was an error processing your request. Error: ${error.message}`;
