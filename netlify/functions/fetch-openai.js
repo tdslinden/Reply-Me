@@ -1,7 +1,7 @@
 // netlify/functions/fetch-openai.js
-exports.handler = async function(event, emotionText, emotionType, personality) {
-    const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
-    const { prompt, personality, emotionType } = JSON.parse(event.body);
+exports.handler = async function(event, context) {
+    const OPENAI_API_KEY = process.env.OPENAI_API_KEY;    
+    const { emotionText, personality, emotionType } = JSON.parse(event.body);
     try {
         const response = await fetch('https://api.openai.com/v1/chat/completions', {
             method: 'POST',
