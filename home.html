@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💌 Reply Me</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-yellow-100 flex flex-col items-center justify-center min-h-screen">
+    <!-- Image Outside the Box -->
+    <div class="flex justify-center mb-4">
+        <img src="img/emoji-faces.png" alt="Emotion Emojis" class="w-full max-w-sm object-cover">
+    </div>
+
+    <!-- Main Container -->
+    <div class="w-full max-w-sm bg-white p-6 rounded-lg shadow-lg">
+        <!-- Emotion Input -->
+        <div class="mb-4">
+            <label for="emotion" class="block text-gray-700 text-sm font-bold mb-2">Describe your current feeling</label>
+            <textarea id="emotion" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" rows="2" placeholder="I'm so lost, dunno what to do😢"></textarea>
+        </div>
+
+        <!-- Emotion Selection with Horizontal Alignment -->
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2">Select Your Emotion</label>
+            <div class="flex justify-between space-x-2">
+                <label class="flex flex-col items-center border border-gray-300 rounded-lg p-2 w-full">
+                    <input type="radio" name="emotionType" value="happy" class="form-radio text-yellow-500 mb-1">
+                    <span class="text-gray-700">Happy</span>
+                    <span>😊</span>
+                </label>
+                <label class="flex flex-col items-center border border-gray-300 rounded-lg p-2 w-full">
+                    <input type="radio" name="emotionType" value="sad" class="form-radio text-blue-500 mb-1">
+                    <span class="text-gray-700">Sad</span>
+                    <span>😢</span>
+                </label>
+                <label class="flex flex-col items-center border border-gray-300 rounded-lg p-2 w-full">
+                    <input type="radio" name="emotionType" value="angry" class="form-radio text-red-500 mb-1">
+                    <span class="text-gray-700">Angry</span>
+                    <span>😡</span>
+                </label>
+                <label class="flex flex-col items-center border border-gray-300 rounded-lg p-2 w-full">
+                    <input type="radio" name="emotionType" value="anxious" class="form-radio text-purple-500 mb-1">
+                    <span class="text-gray-700">Anxious</span>
+                    <span>😰</span>
+                </label>
+                <label class="flex flex-col items-center border border-gray-300 rounded-lg p-2 w-full">
+                    <input type="radio" name="emotionType" value="tired" class="form-radio text-yellow-400 mb-1">
+                    <span class="text-gray-700">Tired</span>
+                    <span>😴</span>
+                </label>
+            </div>
+        </div>
+
+        <!-- Personality Selection with Arrow -->
+        <div class="mb-4">
+            <label for="personality" class="block text-gray-700 text-sm font-bold mb-2">Who do you want to hear from?</label>
+            <div class="relative">
+                <select id="personality" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    <option value="mom">Loving and empathetic mother</option>
+                    <option value="grandparents">Your number one fan grandparents</option>
+                    <option value="dad">Dad who’s a quote maker</option>
+                </select>
+                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M5.05 7.05a1 1 0 011.41 0L10 10.59l3.54-3.54a1 1 0 011.41 1.41l-4.25 4.25a1 1 0 01-1.41 0L5.05 8.46a1 1 0 010-1.41z"/></svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reply Button -->
+        <div class="text-center">
+            <button id="replyButton" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Reply Me</button>
+        </div>
+
+        <!-- Reply Message -->
+        <div id="replyMessage" class="mt-4 p-4 bg-gray-100 rounded-lg shadow-inner text-gray-800 hidden"></div>
+    </div>
+
+    <script>
+        document.getElementById('replyButton').addEventListener('click', async function() {
+            const emotionText = document.getElementById('emotion').value;
+            const emotionType = document.querySelector('input[name="emotionType"]:checked').value;
+            const personality = document.getElementById('personality').value;
+
+            // Fetch the reply from the API
+            const message = await getReplyFromAPI(emotionText, emotionType, personality);
+            
+            // Display the message
+            const replyMessage = document.getElementById('replyMessage');
+            replyMessage.textContent = message;
+            replyMessage.classList.remove('hidden');
+        });
+    </script>
+</body>
+</html>
