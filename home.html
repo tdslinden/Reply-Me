@@ -82,9 +82,15 @@
             const emotionType = document.querySelector('input[name="emotionType"]:checked').value;
             const personality = document.getElementById('personality').value;
 
-            // Fetch the reply from the API
-            const message = await getReplyFromAPI(emotionText, emotionType, personality);
-            
+            // Fetch the reply from the API            
+            const message = await fetch('netlify/functions/fetch-openai', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ emotionText: emotionText, emotionType: emotionType, personality: personality })
+            })
+
             // Display the message
             const replyMessage = document.getElementById('replyMessage');
             replyMessage.textContent = message;
