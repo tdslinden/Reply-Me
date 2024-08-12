@@ -1,7 +1,12 @@
 // netlify/functions/fetch-openai.js
 export default async (event, context) => {
     const OPENAI_API_KEY = process.env.OPENAI_API_KEY;    
-    const { emotionText, personality, emotionType } = JSON.parse(event.body);
+    console.log(event.body);
+    console.log("~~~~ before parse ~~~~")
+    const { emotionText, personality, emotionType } = await JSON.parse(event.body);
+    console.log(emotionText)
+    console.log(personality);
+    console.log(emotionType);
     try {
         // const response = await fetch('https://api.openai.com/v1/chat/completions', {
         //     method: 'POST',
@@ -37,7 +42,6 @@ export default async (event, context) => {
         return {
             statusCode: 500,
             body: JSON.stringify({message: `There was an error processing your request. Error: ${error.message}`})
-
         }
     }
 
