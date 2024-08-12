@@ -34,8 +34,11 @@ export default async (event, context) => {
         };
 
         } catch (error) {
-        console.error('Error fetching reply:', error);
-        return `There was an error processing your request. Error: ${error.message}`;
+        return {
+            statusCode: 500,
+            body: JSON.stringify({message: `There was an error processing your request. Error: ${error.message}`})
+
+        }
     }
 
 };
