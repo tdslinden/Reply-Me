@@ -83,7 +83,7 @@
             const personality = document.getElementById('personality').value;
 
             // Fetch the reply from the API            
-            const message = await fetch('/.netlify/functions/fetch-openai', {
+            const message = await fetch('https://replymee.netlify.app/.netlify/functions/fetch-openai', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
