@@ -29,11 +29,11 @@ export default async (event, context) => {
     
         return {
             statusCode: 200,
-            headers: {
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-                "Access-Control-Allow-Headers": "Content-Type, Authorization"
-            },          
+            // headers: {
+            //     "Access-Control-Allow-Origin": "*",
+            //     "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+            //     "Access-Control-Allow-Headers": "Content-Type, Authorization"
+            // },          
             // body: JSON.stringify({ message: data.choices[0].text.trim() })
             body: JSON.stringify({ message: "HELLO" })
         };
