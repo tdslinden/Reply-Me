@@ -1,5 +1,7 @@
 export async function handler(event, context) {
   const { emotionText, personality, emotionType } = JSON.parse(event.body);
+  const systemContent = `You are a ${personality}.`;
+  const userContent = `I am feeling ${emotionType} and wrote: "${emotionText}".`;
   try {
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
@@ -10,10 +12,10 @@ export async function handler(event, context) {
       body: JSON.stringify({
         model: "gpt-3.5-turbo",
         messages: [
-          { role: "system", content: `You are a ${personality}.` },
+          { role: "system", content: systemContent },
           {
             role: "user",
-            content: `I am feeling ${emotionType} and wrote: "${emotionText}".`,
+            content: userContent,
           },
         ],
         max_tokens: 100,
