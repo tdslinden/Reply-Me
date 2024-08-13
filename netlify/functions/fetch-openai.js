@@ -1,5 +1,3 @@
-const fetch = require("node-fetch");
-
 export async function handler(event, context) {
   const { emotionText, personality, emotionType } = JSON.parse(event.body);
   try {
