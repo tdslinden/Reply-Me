@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>💌 Reply Me</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
+
 <body class="bg-yellow-100 flex flex-col items-center justify-center min-h-screen">
     <!-- Image Outside the Box -->
     <div class="flex justify-center mb-4">
@@ -16,8 +18,11 @@
     <div class="w-full max-w-sm bg-white p-6 rounded-lg shadow-lg">
         <!-- Emotion Input -->
         <div class="mb-4">
-            <label for="emotion" class="block text-gray-700 text-sm font-bold mb-2">Describe your current feeling</label>
-            <textarea id="emotion" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" rows="2" placeholder="I'm so lost, dunno what to do😢"></textarea>
+            <label for="emotion" class="block text-gray-700 text-sm font-bold mb-2">Describe your current
+                feeling</label>
+            <textarea id="emotion"
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                rows="2" placeholder="I'm so lost, dunno what to do😢"></textarea>
         </div>
 
         <!-- Emotion Selection with Horizontal Alignment -->
@@ -54,22 +59,29 @@
 
         <!-- Personality Selection with Arrow -->
         <div class="mb-4">
-            <label for="personality" class="block text-gray-700 text-sm font-bold mb-2">Who do you want to hear from?</label>
+            <label for="personality" class="block text-gray-700 text-sm font-bold mb-2">Who do you want to hear
+                from?</label>
             <div class="relative">
-                <select id="personality" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                <select id="personality"
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                     <option value="mom">Loving and empathetic mother</option>
                     <option value="grandparents">Your number one fan grandparents</option>
                     <option value="dad">Dad who’s a quote maker</option>
                 </select>
                 <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M5.05 7.05a1 1 0 011.41 0L10 10.59l3.54-3.54a1 1 0 011.41 1.41l-4.25 4.25a1 1 0 01-1.41 0L5.05 8.46a1 1 0 010-1.41z"/></svg>
+                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <path
+                            d="M5.05 7.05a1 1 0 011.41 0L10 10.59l3.54-3.54a1 1 0 011.41 1.41l-4.25 4.25a1 1 0 01-1.41 0L5.05 8.46a1 1 0 010-1.41z" />
+                    </svg>
                 </div>
             </div>
         </div>
 
         <!-- Reply Button -->
         <div class="text-center">
-            <button id="replyButton" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Reply Me</button>
+            <button id="replyButton"
+                class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Reply
+                Me</button>
         </div>
 
         <!-- Reply Message -->
@@ -77,25 +89,28 @@
     </div>
 
     <script>
-        document.getElementById('replyButton').addEventListener('click', async function() {
+        document.getElementById('replyButton').addEventListener('click', async function () {
             const emotionText = document.getElementById('emotion').value;
             const emotionType = document.querySelector('input[name="emotionType"]:checked').value;
             const personality = document.getElementById('personality').value;
 
             // Fetch the reply from the API            
-            const message = await fetch('https://replymee.netlify.app/.netlify/functions/fetch-openai', {
+            const message = await fetch('/.netlify/functions/fetch-openai', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                // body: JSON.stringify({ emotionText: emotionText, emotionType: emotionType, personality: personality })
+                body: JSON.stringify({ emotionText: emotionText, emotionType: emotionType, personality: personality })
             })
 
             // Display the message
             const replyMessage = document.getElementById('replyMessage');
-            replyMessage.textContent = message.json();
+            const responseObjectString = JSON.stringify(await message.json());
+            const responseObject = JSON.parse(responseObjectString);
+            replyMessage.textContent = responseObject.message;
             replyMessage.classList.remove('hidden');
         });
     </script>
 </body>
+
 </html>
