@@ -32,7 +32,6 @@ export async function handler(event, context) {
   } catch (error) {
     return {
       statusCode: 500,
-      // body: JSON.stringify({ message: data.choices[0].text.trim() })
       body: JSON.stringify({
         message: `There was an error processing your request. Error: ${error.message}`,
       }),
