@@ -1,0 +1,8 @@
+[build]
+  publish = "."
+
+# Define redirects and proxy rules
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
