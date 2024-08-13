@@ -1,27 +1,27 @@
 export async function handler(event, context) {
-  const { emotionText, personality, emotionType } = JSON.parse(event.body);
+  //   const { emotionText, personality, emotionType } = JSON.parse(event.body);
   try {
-//     const response = await fetch("https://api.openai.com/v1/chat/completions", {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json",
-//         Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
-//       },
-//       body: JSON.stringify({
-//         model: "gpt-3.5-turbo",
-//         messages: [
-//           { role: "system", content: `You are a ${personality}.` },
-//           {
-//             role: "user",
-//             content: `I am feeling ${emotionType} and wrote: "${emotionText}".`,
-//           },
-//         ],
-//         max_tokens: 100,
-//         temperature: 0.7,
-//       }),
-//     });
+    //     const response = await fetch("https://api.openai.com/v1/chat/completions", {
+    //       method: "POST",
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //         Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+    //       },
+    //       body: JSON.stringify({
+    //         model: "gpt-3.5-turbo",
+    //         messages: [
+    //           { role: "system", content: `You are a ${personality}.` },
+    //           {
+    //             role: "user",
+    //             content: `I am feeling ${emotionType} and wrote: "${emotionText}".`,
+    //           },
+    //         ],
+    //         max_tokens: 100,
+    //         temperature: 0.7,
+    //       }),
+    //     });
 
-//     const data = await response.json();
+    //     const data = await response.json();
 
     return {
       statusCode: 200,
