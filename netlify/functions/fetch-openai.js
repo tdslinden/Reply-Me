@@ -1,5 +1,5 @@
 export async function handler(event, context) {
-  //   const { emotionText, personality, emotionType } = JSON.parse(event.body);
+  const { emotionText, personality, emotionType } = JSON.parse(event.body);
   try {
     //     const response = await fetch("https://api.openai.com/v1/chat/completions", {
     //       method: "POST",
