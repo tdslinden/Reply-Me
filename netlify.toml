@@ -1,5 +1,6 @@
 [build]
   publish = "."
+  functions = "netlify/functions"  # Path to the functions directory
 
 # Define redirects and proxy rules
 [[redirects]]
